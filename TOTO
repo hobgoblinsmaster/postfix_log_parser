@@ -1,0 +1,46 @@
+== Fonctionnalités ==
+* Lire les logs plat et gz.
+* Regrouper les ≠ lignes du parcours d’un mail.
+* Recherche multicritère.
+* Stockage db (parsing régulier + recherche instantannée) ?
+* Recherche web ?
+
+
+== Modules ==
+=== Log reader ===
+* En entrée date min, date max, log dir, file pattern
+* Lit les fichiers par ligne
+* Découpe chaque ligne en
+** Progname
+** PID
+** Queue ID
+** Message
+* renvoie la date et checksum de la dernière ligne lue
+=== Message parser ===
+* En entrée
+** Progname
+** Message
+* En sortie, suivant le progname et le message
+** gateway in
+** gateway out
+** from
+** to
+** size
+** mail ID
+** in status (code + message)
+** out status (code + message)
+** filter status (spam, ham, etc)
+=== Mail agregator ===
+* Appelle Log reader et Message parser
+* pour chaque ligne décodée complète un objet mail contenant
+** Queue ID (liste)
+** gateway in
+** gateway out
+** from
+** to (liste)
+** in status
+** out status
+** filter status (liste)
+** date in
+** date out
+** global status (rejected, passed, bounced, in queue)
